@@ -12,7 +12,7 @@ export class RegisterClient {
   ) {}
 
   async execute(clientInput: ClientInputDTO) {
-    this.validator.ClientValidateInput(clientInput)
+    await this.validator.ClientValidateInput(clientInput)
 
     const existClient = await this.clientRepository.getByEmail(clientInput.email)
     if(existClient) throw new Error('Client already exists')

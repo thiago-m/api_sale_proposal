@@ -10,7 +10,7 @@ export class RegisterProduct {
   ) {}
 
   async execute(productInput: ProductInputDTO) {
-    this.validator.ProductValidateInput(productInput)
+    await this.validator.ProductValidateInput(productInput)
 
     const existProduct = await this.productRepository.getByName(productInput.name)
     if(existProduct) throw new Error('Product already exists')

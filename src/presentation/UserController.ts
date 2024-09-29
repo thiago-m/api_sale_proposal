@@ -17,7 +17,7 @@ export class UserController {
       const user = await this.LoginUser.execute(email, password)
       res.json(user)
     } catch (error: any) {
-      res.status(404).send(error?.message ?? 'Erro desconhecido')
+      res.status(404).json({ message: error?.message ?? 'Erro desconhecido' })
     }
   }
 }

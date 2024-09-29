@@ -1,6 +1,7 @@
 import * as Yup from 'yup'
 import { ClientInput } from "../dtos/ClientInput"
 import { ProductInput } from '../dtos/ProductInput'
+import { ServiceInput } from '../dtos/ServiceInput'
 import { Validator } from '../../domain/services/Validator'
 
 export class YupValidator implements Validator {
@@ -51,7 +52,7 @@ export class YupValidator implements Validator {
       price: Yup.number()
         .positive('O preço deve ser positivo')
         .required('O preço é obrigatório'),
-      type: Yup.mixed().oneOf(['novo', 'usado', 'comestível'])
+      type: Yup.mixed().oneOf(['novo', 'usado', 'comestível'], 'Tipo de produto inválido')
         .required('O tipo de produto é obrigatório')
     })
 
@@ -62,5 +63,28 @@ export class YupValidator implements Validator {
     }
   }
 
+  async ServiceValidateInput(serviceInput: ServiceInput): Promise<void> {
+    const schema = Yup.object().shape({
+      name: Yup.string()
+        .matches(/^[a-zA-Z0-9\s]+$/, 'O nome só pode ter letras, números e espaços')
+        .min(3, 'O nome deve ter pelo menos 3 caracteres')
+        .max(30, 'O nome deve ter no máximo 30 caracteres')
+        .required('O nome é obrigatório'),
+      description: Yup.string()
+        .min(3, 'A descrição deve ter pelo menos 3 caracteres')
+        .max(250, 'A descrição deve ter no máximo 250 caracteres')
+        .required('A descrição é obrigatória'),
+      price: Yup.number()
+        .positive('O preço deve ser positivo')
+        .required('O preço é obrigatório'),
+      type: Yup.mixed().oneOf(['por hora', 'por empreitada', 'outros'], 'Tipo de serviço inválido.')
+        .required('O tipo de serviço é obrigatório')
+    })
 
+    try { await schema.validate(serviceInput) }
+    catch (error) {
+      console.log('error in validate service data', error)
+      throw new Error('Erro em validar dados do serviço')
+    }
+  }
 }

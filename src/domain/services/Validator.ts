@@ -1,4 +1,5 @@
 import { productType } from "../entities/Product"
+import { serviceType } from "../entities/Service"
 
 export interface ClientInputDTO {
   name: string
@@ -14,8 +15,16 @@ export interface ProductInputDTO {
   type: productType
 }
 
+export interface ServiceInputDTO {
+  name: string
+  description: string
+  price: number
+  type: serviceType
+}
+
 export interface Validator {
   normalizeInput(clientInput: ClientInputDTO): ClientInputDTO
   ClientValidateInput(clientInput: ClientInputDTO): Promise<void>
   ProductValidateInput(productInput: ProductInputDTO): Promise<void>
+  ServiceValidateInput(serviceInput: ServiceInputDTO): Promise<void>
 }
