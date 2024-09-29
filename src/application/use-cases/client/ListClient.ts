@@ -1,4 +1,4 @@
-import { ClientRepository } from "../../domain/repositories/ClientRepository"
+import { ClientRepository } from "../../../domain/repositories/ClientRepository"
 
 export class ListClient {
   constructor(private clientRepository: ClientRepository) {}
