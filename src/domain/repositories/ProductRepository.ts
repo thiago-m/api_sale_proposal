@@ -2,6 +2,7 @@ import { Product } from "../entities/Product"
 
 export interface ProductRepository {
   list(): Promise<Array<Product> | []>
-  getByName(id: string): Promise<Product | null>
+  getById(id: string): Promise<Product | null>
+  getByName(name: string): Promise<Product | null>
   register(product: Product): Promise<void>
 }
