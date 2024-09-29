@@ -40,7 +40,7 @@ export class YupValidator implements Validator {
   async ProductValidateInput(productInput: ProductInput): Promise<void> {
     const schema = Yup.object().shape({
       name: Yup.string()
-        .matches(/^[a-zA-Z\s]+$/, 'O nome só pode ter letras e espaços')
+        .matches(/^[a-zA-Z0-9\s]+$/, 'O nome só pode ter letras, números e espaços')
         .min(3, 'O nome deve ter pelo menos 3 caracteres')
         .max(30, 'O nome deve ter no máximo 30 caracteres')
         .required('O nome é obrigatório'),
