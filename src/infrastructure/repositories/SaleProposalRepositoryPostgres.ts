@@ -18,8 +18,10 @@ export class SaleProposalRepositoryPostgres implements SaleProposalRepository {
         spi.type AS item_type,
         p.id AS product_id,
         p.name AS product_name,
+        p.price AS product_price,
         s.id AS service_id,
-        s.name AS service_name
+        s.name AS service_name,
+        s.price AS service_price
       FROM
         sale_proposal sp
       JOIN
@@ -56,13 +58,15 @@ export class SaleProposalRepositoryPostgres implements SaleProposalRepository {
         // @ts-ignore
         saleProposal.services.push({
           id: row.service_id,
-          name: row.service_name
+          name: row.service_name,
+          price: row.service_price
         })
       } else if (row.product_id) {
         // @ts-ignore
         saleProposal.products.push({
           id: row.product_id,
-          name: row.product_name
+          name: row.product_name,
+          price: row.product_price
         })
       }
     })
@@ -83,8 +87,10 @@ export class SaleProposalRepositoryPostgres implements SaleProposalRepository {
         spi.type AS item_type,
         p.id AS product_id,
         p.name AS product_name,
+        p.price AS product_price,
         s.id AS service_id,
-        s.name AS service_name
+        s.name AS service_name,
+        s.price AS service_price
       FROM
         sale_proposal sp
       JOIN
@@ -127,13 +133,15 @@ export class SaleProposalRepositoryPostgres implements SaleProposalRepository {
       if (row.service_id) {
         saleProposal.services.push({
           id: row.service_id,
-          name: row.service_name
+          name: row.service_name,
+          price: row.service_price
         })
       }
       if (row.product_id) {
         saleProposal.products.push({
           id: row.product_id,
-          name: row.product_name
+          name: row.product_name,
+          price: row.product_price
         })
       }
     })

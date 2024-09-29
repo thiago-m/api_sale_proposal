@@ -25,7 +25,7 @@ export class SaleProposalReturn {
   constructor(
     public id: string,
     public client: {id: string, name: string, email: string},
-    public services: Array<{id: string, name: string}>,
-    public products: Array<{id: string, name: string}>
+    public services: Array<{id: string, name: string, price: string}>,
+    public products: Array<{id: string, name: string, price: string}>
   ) {}
 }
