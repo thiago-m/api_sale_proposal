@@ -1,11 +1,11 @@
 import { Request, Response } from "express"
-import { GetClient } from "../application/use-cases/GetClient"
+import { GetClient } from "../application/use-cases/client/GetClient"
 import { ClientRepositoryPostgres } from "../infrastructure/repositories/ClientRepositoryPostgres"
-import { RegisterClient } from "../application/use-cases/RegisterClient"
+import { RegisterClient } from "../application/use-cases/client/RegisterClient"
 import { YupValidator } from "../application/services/Validator"
 import { BcryptEncrypter } from "../application/services/Encrypter"
-import { ListClient } from "../application/use-cases/ListClient"
-import { GetByEmailClient } from "../application/use-cases/GetByEmailClient"
+import { ListClient } from "../application/use-cases/client/ListClient"
+import { GetByEmailClient } from "../application/use-cases/client/GetByEmailClient"
 
 export class ClientController {
   private getClient: GetClient
@@ -52,7 +52,7 @@ export class ClientController {
   async registerClientController(req: Request, res: Response): Promise<void> {
     try {
       await this.registerClient.execute(req.body)
-      res.status(201)
+      res.status(201).json()
     } catch (error: any) {
       res.status(404).json(error?.message ?? 'Erro desconhecido')
     }
