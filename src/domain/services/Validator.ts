@@ -1,5 +1,6 @@
 import { productType } from "../entities/Product"
 import { serviceType } from "../entities/Service"
+import { saleProposalType } from "../entities/SaleProposalItem"
 
 export interface ClientInputDTO {
   name: string
@@ -20,6 +21,12 @@ export interface ServiceInputDTO {
   description: string
   price: number
   type: serviceType
+}
+
+export interface SaleProposalInputDTO {
+  name: string
+  client_id: string
+  itens: Array<{type: saleProposalType, itens: Array<string>}>
 }
 
 export interface Validator {

@@ -4,6 +4,7 @@ import { UserController } from "./UserController"
 import { AuthJWT } from "../application/services/Auth"
 import { ProductController } from "./ProductController"
 import { ServiceController } from "./ServiceController.ts"
+import { SaleProposalController } from "./SaleProposalController"
 
 const router = Router()
 
@@ -11,6 +12,7 @@ const userController = new UserController()
 const clientController = new ClientController()
 const productController = new ProductController()
 const serviceController = new ServiceController()
+const saleProposalController = new SaleProposalController()
 
 const auth = new AuthJWT()
 
@@ -25,5 +27,10 @@ router.get('/product', auth.authenticateJWT, (req, res) => productController.lis
 
 router.post('/service', auth.authenticateJWT,  (req, res) => serviceController.registerServiceController(req, res))
 router.get('/service', auth.authenticateJWT, (req, res) => serviceController.listServiceController(req, res))
+
+router.post('/sale-proposal', auth.authenticateJWT, (req, res) => saleProposalController.registerSaleProposalController(req, res))
+router.get('/sale-proposal', auth.authenticateJWT, (req, res) => saleProposalController.listSaleProposalController(req, res))
+router.get('/sale-proposal/:id', auth.authenticateJWT, (req, res) => saleProposalController.getSaleProposalController(req, res))
+router.post('/sale-proposal/:id', auth.authenticateJWT, (req, res) => saleProposalController.sendSaleProposalByEmailController(req, res))
 
 export { router }
