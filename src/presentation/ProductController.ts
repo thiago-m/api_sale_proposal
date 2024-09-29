@@ -18,7 +18,7 @@ export class ProductController {
       const product = await this.listProduct.execute()
       res.status(200).json(product)
     } catch (error: any) {
-      res.status(404).json({ message: error?.message ?? 'Erro desconhecido' })
+      res.status(404).json({ message: error?.message || 'Erro desconhecido' })
     }
   }
 
@@ -27,7 +27,7 @@ export class ProductController {
       await this.registerProduct.execute(req.body)
       res.status(201).json()
     } catch (error: any) {
-      res.status(404).json({ message: error?.message ?? 'Erro desconhecido' })
+      res.status(404).json({ message: error?.message || 'Erro desconhecido' })
     }
   }
 }

@@ -25,7 +25,7 @@ export class ClientController {
       const client = await this.getClient.execute(req.params.id)
       res.status(200).json(client)
     } catch (error: any) {
-      res.status(404).json(error?.message ?? 'Erro desconhecido')
+      res.status(404).json(error?.message || 'Erro desconhecido')
     }
   }
 
@@ -34,7 +34,7 @@ export class ClientController {
       const client = await this.getClientByEmail.execute(email)
       res.status(200).json(client)
     } catch (error: any) {
-      res.status(404).json(error?.message ?? 'Erro desconhecido')
+      res.status(404).json(error?.message || 'Erro desconhecido')
     }
   }
 
@@ -54,7 +54,7 @@ export class ClientController {
       await this.registerClient.execute(req.body)
       res.status(201).json()
     } catch (error: any) {
-      res.status(404).json({ message: error?.message ?? 'Erro desconhecido' })
+      res.status(404).json({ message: error?.message || 'Erro desconhecido' })
     }
   }
 }

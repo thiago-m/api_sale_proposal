@@ -18,7 +18,7 @@ export class ServiceController {
       const service = await this.listService.execute()
       res.status(200).json(service)
     } catch (error: any) {
-      res.status(404).json({message: error?.message ?? 'Erro desconhecido'})
+      res.status(404).json({message: error?.message || 'Erro desconhecido'})
     }
   }
 
@@ -27,7 +27,7 @@ export class ServiceController {
       await this.registerService.execute(req.body)
       res.status(201).json()
     } catch (error: any) {
-      res.status(404).json({message: error?.message ?? 'Erro desconhecido'})
+      res.status(404).json({message: error?.message || 'Erro desconhecido'})
     }
   }
 }
