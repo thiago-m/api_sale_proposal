@@ -5,7 +5,7 @@ import { ClientRepository } from '../../domain/repositories/ClientRepository'
 export class ClientRepositoryPostgres implements ClientRepository {
   private readonly table = 'clients'
 
-  async get(id: string): Promise<Omit<Client, 'password'> | null> {
+  async getById(id: string): Promise<Omit<Client, 'password'> | null> {
     const result = await pool.query(`SELECT * FROM ${this.table} WHERE id = $1`, [id])
     if (result.rows.length === 0) return null
 
